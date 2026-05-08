@@ -1,0 +1,73 @@
+<h2>MVP 页面结构：你更偏好哪种入口？</h2>
+<p class="subtitle">点击选择一个方向；后续我会按该方向画更细的线框图与交互流</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>看板优先</h3>
+      <p>首页直接是总览看板；上传/评估/对比作为看板里的入口</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>适合</h4>
+          <ul>
+            <li>用户最常看结果</li>
+            <li>强调持续监控</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>注意</h4>
+          <ul>
+            <li>首次导入引导要清晰</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>流程向导</h3>
+      <p>首页是 1-2-3 步骤：上传 → 评估 → 对比 → 导出</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>适合</h4>
+          <ul>
+            <li>首次使用与标准流程</li>
+            <li>操作型用户</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>注意</h4>
+          <ul>
+            <li>结果查看需要再跳一步</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>报告中心</h3>
+      <p>首页是历史报告列表；每次评估产出一个报告，支持版本对比</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>适合</h4>
+          <ul>
+            <li>评估交付/留痕强</li>
+            <li>以报告为主的协作</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>注意</h4>
+          <ul>
+            <li>实时看板不如 A 直观</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
