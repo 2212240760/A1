@@ -1,0 +1,73 @@
+<h2>A3（对比驱动）：默认“比较对象”怎么定？</h2>
+<p class="subtitle">影响首页对比区的默认展示与用户操作成本</p>
+
+<div class="options">
+  <div class="option" data-choice="d1" onclick="toggleSelect(this)">
+    <div class="letter">D1</div>
+    <div class="content">
+      <h3>自动：最近两版</h3>
+      <p>默认 A=最新版本，B=上一版本；可手动切换</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>零配置，符合“持续迭代”</li>
+            <li>最省操作</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>不适合“固定基线”对比</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="d2" onclick="toggleSelect(this)">
+    <div class="letter">D2</div>
+    <div class="content">
+      <h3>基线：固定参考版本</h3>
+      <p>默认 B=基线版本（可设置/锁定），A=最新版本</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>适合标准版/验收版作为参照</li>
+            <li>结果更可解释</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>需要一次配置与管理基线</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="d3" onclick="toggleSelect(this)">
+    <div class="letter">D3</div>
+    <div class="content">
+      <h3>记忆：按用户上次选择</h3>
+      <p>每个用户记住最近一次 A/B 的选择并恢复</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>优点</h4>
+          <ul>
+            <li>适合多场景、多数据集并行</li>
+            <li>个性化强</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>缺点</h4>
+          <ul>
+            <li>需要用户体系；也更难排查“为何默认这样”</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
