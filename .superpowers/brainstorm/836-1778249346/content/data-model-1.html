@@ -1,0 +1,64 @@
+<h2>数据模型（MVP）：哪些实体必须先落库？</h2>
+<p class="subtitle">基于：管理员/普通用户（你已确认）+ Excel 导入 + 评估 + 对比 + 报告</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">核心实体（建议）</div>
+    <div class="mockup-body">
+      <ul>
+        <li><b>User</b>：用户（角色：admin/user）</li>
+        <li><b>Dataset</b>：数据集（名称、描述、归属）</li>
+        <li><b>DatasetVersion</b>：数据集版本（由一次上传产生，指向 Excel 文件与解析信息）</li>
+        <li><b>IngestJob</b>：导入任务（解析/校验/入库日志）</li>
+        <li><b>RuleSet</b>：指标规则集（版本化，管理员维护）</li>
+        <li><b>EvalJob</b>：评估任务（输入：版本+规则集；输出：评估结果）</li>
+        <li><b>CompareJob</b>：对比任务（输入：版本A/B；输出：差异结果）</li>
+        <li><b>Report</b>：报告（引用某次评估/对比结果，可导出）</li>
+        <li><b>UserPreference</b>：用户偏好（D3：记住上次A/B选择）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">关系（简图）</div>
+    <div class="mockup-body">
+      <div class="placeholder" style="padding:10px;">
+        <div><b>User</b> 1—N <b>Dataset</b></div>
+        <div><b>Dataset</b> 1—N <b>DatasetVersion</b></div>
+        <div><b>DatasetVersion</b> 1—N <b>IngestJob</b></div>
+        <div><b>RuleSet</b> 1—N <b>EvalJob</b></div>
+        <div><b>DatasetVersion</b> 1—N <b>EvalJob</b></div>
+        <div><b>DatasetVersion(A/B)</b> 1—N <b>CompareJob</b></div>
+        <div><b>EvalJob / CompareJob</b> 1—N <b>Report</b></div>
+        <div><b>User</b> 1—N <b>UserPreference</b>（last_compare_A/B per dataset）</div>
+      </div>
+      <p class="subtitle" style="margin-top:10px;">
+        结果明细（评估行级/差异行级）先按“文件导出 + 可查询摘要”做；后续再决定是否全量入库。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="persist-all" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>结果全量入库</h3>
+      <p>评估/差异的行级明细也入库，页面可复杂筛选与二次分析</p>
+    </div>
+  </div>
+  <div class="option" data-choice="persist-hybrid" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>混合（推荐）</h3>
+      <p>落库：摘要/KPI/TopN/索引；明细：保存为 Parquet/CSV 供下载与按需查询</p>
+    </div>
+  </div>
+  <div class="option" data-choice="persist-file" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>结果仅文件化</h3>
+      <p>评估/对比结果只生成文件与报告，页面展示有限摘要</p>
+    </div>
+  </div>
+</div>
