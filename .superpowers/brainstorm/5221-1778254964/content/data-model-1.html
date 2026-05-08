@@ -1,0 +1,51 @@
+<h2>数据模型（MVP）：评估/对比结果怎么存？</h2>
+<p class="subtitle">基于：A3（对比驱动）+ D3（按用户记忆）+ Excel 导入 + 简单登录 + 管理员/普通用户</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">核心实体（建议）</div>
+    <div class="mockup-body">
+      <ul>
+        <li><b>User</b>：用户（role：admin/user）</li>
+        <li><b>Dataset</b>：数据集</li>
+        <li><b>DatasetVersion</b>：数据集版本（一次上传生成）</li>
+        <li><b>IngestJob</b>：导入任务（解析/校验日志）</li>
+        <li><b>RuleSet</b>：指标规则集（管理员维护，版本化）</li>
+        <li><b>EvalJob</b>：评估任务（版本 + 规则集 → 评估结果）</li>
+        <li><b>CompareJob</b>：对比任务（版本A/B → 差异结果）</li>
+        <li><b>Report</b>：报告（引用某次评估/对比，可下载）</li>
+        <li><b>UserPreference</b>：用户偏好（记住上次 A/B 选择，按数据集维度）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">结果落库策略（请选一个）</div>
+    <div class="mockup-body">
+      <p class="subtitle">影响：筛选能力、存储成本、开发复杂度</p>
+      <div class="options">
+        <div class="option" data-choice="persist-all" onclick="toggleSelect(this)">
+          <div class="letter">A</div>
+          <div class="content">
+            <h3>结果全量入库</h3>
+            <p>评估/差异的行级明细都入库，页面可深度筛选与二次分析</p>
+          </div>
+        </div>
+        <div class="option" data-choice="persist-hybrid" onclick="toggleSelect(this)">
+          <div class="letter">B</div>
+          <div class="content">
+            <h3>混合（推荐）</h3>
+            <p>落库：摘要/KPI/TopN/索引；明细：保存为文件（如 Parquet/CSV）按需查询/下载</p>
+          </div>
+        </div>
+        <div class="option" data-choice="persist-file" onclick="toggleSelect(this)">
+          <div class="letter">C</div>
+          <div class="content">
+            <h3>结果仅文件化</h3>
+            <p>评估/对比结果只生成文件与报告，页面仅展示有限摘要</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
