@@ -1,0 +1,91 @@
+<h2>看板优先（A）：总览看板布局你更偏好哪一种？</h2>
+<p class="subtitle">都会包含：上传入口、最新评估结果、版本对比入口、报告导出入口</p>
+
+<div class="cards">
+  <div class="card" data-choice="a1" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 A1：顶部 KPI + 任务入口 + 明细区</div>
+        <div class="mockup-body">
+          <div class="mock-nav">A1 | Logo | 总览 | 数据集 | 评估 | 对比 | 报告</div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <div class="placeholder" style="flex:1; height:72px;">KPI：覆盖率 / 合规率 / 异常数</div>
+            <div class="placeholder" style="flex:1; height:72px;">KPI：评分 / TOP 异常网格</div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <button class="mock-button" style="flex:1;">上传文件</button>
+            <button class="mock-button" style="flex:1;">发起评估</button>
+            <button class="mock-button" style="flex:1;">版本对比</button>
+            <button class="mock-button" style="flex:1;">导出报告</button>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <div class="placeholder" style="flex:2; height:160px;">趋势图（按日期/版本）</div>
+            <div class="placeholder" style="flex:1; height:160px;">最新任务状态</div>
+          </div>
+          <div class="placeholder" style="margin-top:10px; height:140px;">异常明细表（可筛选/跳转到详情）</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A1：指标驱动</h3>
+      <p>适合“先看总体健康度，再下钻异常”。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="a2" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 A2：左侧导航 + 三块大区（数据/任务/结果）</div>
+        <div class="mockup-body" style="display:flex; gap:10px; margin-top:10px;">
+          <div class="mock-sidebar" style="width:180px;">
+            <div class="label">导航</div>
+            <div class="placeholder" style="margin-top:8px; height:28px;">总览</div>
+            <div class="placeholder" style="margin-top:8px; height:28px;">数据集</div>
+            <div class="placeholder" style="margin-top:8px; height:28px;">评估任务</div>
+            <div class="placeholder" style="margin-top:8px; height:28px;">版本对比</div>
+            <div class="placeholder" style="margin-top:8px; height:28px;">报告中心</div>
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex; gap:10px;">
+              <div class="placeholder" style="flex:1; height:110px;">数据集概览（最新版本/行数/字段）</div>
+              <div class="placeholder" style="flex:1; height:110px;">任务概览（运行中/失败/成功）</div>
+            </div>
+            <div class="placeholder" style="margin-top:10px; height:120px;">结果概览（KPI + 趋势）</div>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button class="mock-button" style="flex:1;">上传</button>
+              <button class="mock-button" style="flex:1;">评估</button>
+              <button class="mock-button" style="flex:1;">对比</button>
+              <button class="mock-button" style="flex:1;">导出</button>
+            </div>
+            <div class="placeholder" style="margin-top:10px; height:140px;">异常列表（可跳转）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A2：工作台驱动</h3>
+      <p>适合“任务流 + 数据资产”并重的日常使用。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="a3" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">方案 A3：总览 + 强对比位（默认展示最近两版差异）</div>
+        <div class="mockup-body">
+          <div class="mock-nav">A3 | Logo | 总览 | 数据集 | 评估 | 对比 | 报告</div>
+          <div class="placeholder" style="margin-top:10px; height:72px;">KPI 总览（本期 vs 上期）</div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <div class="placeholder" style="flex:2; height:210px;">差异主视图（新增/消失/变化幅度）</div>
+            <div class="placeholder" style="flex:1; height:210px;">版本选择（A/B）+ 快捷对比</div>
+          </div>
+          <div class="placeholder" style="margin-top:10px; height:140px;">差异明细表（支持导出）</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A3：对比驱动</h3>
+      <p>适合“版本迭代频繁、差异是核心价值”。</p>
+    </div>
+  </div>
+</div>
