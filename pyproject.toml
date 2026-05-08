@@ -16,6 +16,7 @@ dependencies = [
   "passlib[bcrypt]",
   "itsdangerous",
   "httpx",
+  "reportlab",
   "pytest",
 ]
 

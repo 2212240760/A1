@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>报告</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>报告</h1>
+        <p>你好，{{ user.username }}</p>
+        <p>
+          <a href="/">总览</a>
+          |
+          <a href="/datasets">数据集</a>
+          |
+          <a href="/eval-jobs">评估任务</a>
+          |
+          <a href="/compare">对比任务</a>
+          |
+          <a href="/reports">报告</a>
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+      </header>
+
+      <section>
+        {% if rows %}
+        <table border="1" cellpadding="6" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>类型</th>
+              <th>数据集ID</th>
+              <th>关联任务ID</th>
+              <th>标题</th>
+              <th>创建时间</th>
+              <th>下载</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+            {% set r = row.report %}
+            {% set f = row.files %}
+            <tr>
+              <td>{{ r.id }}</td>
+              <td>{{ r.type.value }}</td>
+              <td>{{ r.dataset_id }}</td>
+              <td>{{ r.ref_job_id }}</td>
+              <td>{{ r.title }}</td>
+              <td>{{ r.created_at }}</td>
+              <td>
+                {% if f.get("excel") %}
+                <a href="/reports/{{ r.id }}/download?kind=excel">excel</a>
+                {% endif %}
+                {% if f.get("pdf") %}
+                {% if f.get("excel") %} | {% endif %}
+                <a href="/reports/{{ r.id }}/download?kind=pdf">pdf</a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>暂无报告。运行一次评估或对比任务后会自动生成。</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
+

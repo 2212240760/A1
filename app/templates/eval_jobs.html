@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>评估任务</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>评估任务</h1>
+        <p>你好，{{ user.username }}</p>
+        <p>
+          <a href="/">返回首页</a>
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+      </header>
+
+      <section>
+        <h2>新建评估</h2>
+        <form method="post" action="/eval-jobs">
+          <label>
+            数据集版本
+            <select name="dataset_version_id" required>
+              {% for version, dataset in versions %}
+              <option value="{{ version.id }}">
+                {{ dataset.name }} / {{ version.version_label }}（版本ID={{ version.id }}）
+              </option>
+              {% endfor %}
+            </select>
+          </label>
+          <button type="submit">开始评估</button>
+        </form>
+        {% if not versions %}
+        <p>暂无可评估的数据集版本，请先上传 Excel。</p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>我的评估任务</h2>
+        {% if jobs %}
+        <table border="1" cellpadding="6" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>状态</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for job in jobs %}
+            <tr>
+              <td>{{ job.id }}</td>
+              <td>{{ job.status }}</td>
+              <td>{{ job.created_at }}</td>
+              <td>
+                <a href="/eval-jobs/{{ job.id }}">查看</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>暂无评估任务。</p>
+        {% endif %}
+      </section>
+
+      {% if selected_job %}
+      <section>
+        <h2>任务详情：#{{ selected_job.id }}</h2>
+        <p>状态：{{ selected_job.status }}</p>
+        {% if selected_job.error_message %}
+        <p style="color: #b91c1c">错误：{{ selected_job.error_message }}</p>
+        {% endif %}
+
+        {% if result_files %}
+        <h3>下载</h3>
+        <ul>
+          {% for k, v in result_files.items() %}
+          <li>
+            <a href="/eval-jobs/{{ selected_job.id }}/download/{{ k }}">{{ k }}</a>
+            <span>— {{ v }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if summary_pretty %}
+        <h3>汇总</h3>
+        <pre style="max-width: 960px; white-space: pre-wrap">{{ summary_pretty }}</pre>
+        {% endif %}
+      </section>
+      {% endif %}
+    </main>
+  </body>
+</html>

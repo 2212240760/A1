@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>总览</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>对比驱动总览</h1>
+        <p>你好，{{ user.username }}</p>
+        <p>
+          <a href="/datasets">数据集</a>
+          |
+          <a href="/eval-jobs">评估任务</a>
+          |
+          <a href="/compare">对比任务</a>
+          |
+          <a href="/reports">报告</a>
+          {% if is_admin %}
+          |
+          <a href="/rulesets">规则集（管理员）</a>
+          {% endif %}
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+      </header>
+
+      <section>
+        <h2>数据集</h2>
+        {% if datasets %}
+        <form method="get" action="/">
+          <label>
+            选择数据集
+            <select name="dataset_id" required>
+              {% for ds in datasets %}
+              <option value="{{ ds.id }}" {% if selected_dataset_id == ds.id %}selected{% endif %}>
+                {{ ds.name }}（ID={{ ds.id }}）
+              </option>
+              {% endfor %}
+            </select>
+          </label>
+          <button type="submit">切换</button>
+        </form>
+        {% else %}
+        <p>暂无数据集，请先前往 <a href="/datasets">数据集</a> 上传 Excel。</p>
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>对比总览</h2>
+        {% if selected_dataset_id and default_version_a_id and default_version_b_id %}
+        <p>
+          当前组合：数据集ID={{ selected_dataset_id }}，版本A={{ default_version_a_id }}，版本B={{ default_version_b_id }}
+        </p>
+        {% endif %}
+
+        {% if latest_success_job and summary_pretty %}
+        <p>
+          最近一次成功对比：<a href="/compare/{{ latest_success_job.id }}">#{{ latest_success_job.id }}</a>
+        </p>
+        {% if result_files %}
+        <h3>下载</h3>
+        <ul>
+          {% for k, v in result_files.items() %}
+          <li>
+            <a href="/compare/{{ latest_success_job.id }}/download/{{ k }}">{{ k }}</a>
+            <span>— {{ v }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <h3>汇总</h3>
+        <pre style="max-width: 960px; white-space: pre-wrap">{{ summary_pretty }}</pre>
+        {% else %}
+        <p>
+          当前数据集/版本组合暂无成功对比结果，请前往 <a href="/compare">/compare</a> 创建。
+        </p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

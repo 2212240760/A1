@@ -19,5 +19,8 @@ def test_create_tables(tmp_path) -> None:
         assert "dataset_versions" in table_names
         assert "ingest_jobs" in table_names
         assert "rulesets" in table_names
+        assert "eval_jobs" in table_names
+        assert "compare_jobs" in table_names
+        assert "reports" in table_names
 
     assert User.__tablename__ == "users"
