@@ -1,0 +1,43 @@
+<h2>已确认的 MVP 决策（请最后确认一次）</h2>
+<p class="subtitle">确认无误后，我会把它写成设计文档并进入实现计划</p>
+
+<div class="mockup">
+  <div class="mockup-header">产品形态</div>
+  <div class="mockup-body">
+    <ul>
+      <li><b>入口</b>：A（看板优先）→ A3（对比驱动）</li>
+      <li><b>默认对比</b>：D3（按用户记忆上次 A/B）</li>
+      <li><b>登录/权限</b>：简单登录 + 管理员/普通用户</li>
+      <li><b>数据来源</b>：Excel 上传导入</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mockup" style="margin-top:12px;">
+  <div class="mockup-header">数据与结果策略</div>
+  <div class="mockup-body">
+    <ul>
+      <li><b>结果存储</b>：C（结果仅文件化）</li>
+      <li><b>报告导出</b>：两者都做（Excel + PDF）</li>
+      <li><b>Excel 导出</b>：原始明细 + 汇总（多 Sheet）</li>
+      <li><b>PDF 导出</b>：HTML → PDF（模板渲染后转 PDF）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="options" style="margin-top:14px;">
+  <div class="option" data-choice="confirm" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>确认</h3>
+      <p>按上述决策进入设计文档与实现计划</p>
+    </div>
+  </div>
+  <div class="option" data-choice="change" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>要改</h3>
+      <p>我会根据你指出的点调整</p>
+    </div>
+  </div>
+</div>
