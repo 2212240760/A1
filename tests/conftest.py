@@ -1,0 +1,1 @@
+from xlsx_fixtures import build_simple_xlsx_bytes

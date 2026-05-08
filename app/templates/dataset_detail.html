@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数据集详情</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>数据集：{{ dataset.name }}</h1>
+        <p>
+          <a href="/datasets">返回列表</a>
+          |
+          <a href="/">返回首页</a>
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+        {% if dataset.description %}
+        <p>{{ dataset.description }}</p>
+        {% endif %}
+        {% if error %}
+        <p style="color: #b91c1c">{{ error }}</p>
+        {% endif %}
+      </header>
+
+      <section>
+        <h2>版本</h2>
+        {% if versions %}
+        <table border="1" cellpadding="6" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>标签</th>
+              <th>Sheet</th>
+              <th>行数</th>
+              <th>Schema</th>
+              <th>创建时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for v in versions %}
+            <tr>
+              <td>{{ v.id }}</td>
+              <td>{{ v.version_label }}</td>
+              <td>{{ v.sheet_name }}</td>
+              <td>{{ v.row_count }}</td>
+              <td><pre style="margin: 0">{{ v.schema_json }}</pre></td>
+              <td>{{ v.created_at }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>暂无版本。</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
+

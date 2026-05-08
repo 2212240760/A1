@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数据集</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>数据集</h1>
+        <p>你好，{{ user.username }}</p>
+        <p>
+          <a href="/">返回首页</a>
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+      </header>
+
+      <section>
+        <h2>上传 Excel</h2>
+        <form method="post" action="/datasets/upload" enctype="multipart/form-data">
+          <label>
+            数据集名称
+            <input type="text" name="dataset_name" required />
+          </label>
+          <br />
+          <label>
+            版本标签
+            <input type="text" name="version_label" value="v1" />
+          </label>
+          <br />
+          <label>
+            描述
+            <input type="text" name="description" />
+          </label>
+          <br />
+          <label>
+            Excel 文件
+            <input
+              type="file"
+              name="file"
+              accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              required
+            />
+          </label>
+          <br />
+          <button type="submit">上传并导入</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>我的数据集</h2>
+        {% if datasets %}
+        <ul>
+          {% for ds in datasets %}
+          <li>
+            <a href="/datasets/{{ ds.id }}">{{ ds.name }}</a>
+            {% if ds.description %}
+            <span>— {{ ds.description }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>暂无数据集，请先上传一个 Excel。</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
+

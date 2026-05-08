@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>规则集</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>规则集</h1>
+        <p>你好，{{ user.username }}</p>
+        <p>
+          <a href="/">返回首页</a>
+          |
+          <form method="post" action="/logout" style="display: inline">
+            <button type="submit">退出登录</button>
+          </form>
+        </p>
+        {% if error %}
+        <p style="color: #b91c1c">{{ error }}</p>
+        {% endif %}
+      </header>
+
+      <section>
+        <h2>新建规则集</h2>
+        <form method="post" action="/rulesets">
+          <label>
+            名称
+            <input type="text" name="name" required />
+          </label>
+          <br />
+          <label>
+            版本
+            <input type="text" name="version" value="v1" />
+          </label>
+          <br />
+          <label>
+            definition_json
+            <br />
+            <textarea name="definition_json" rows="12" cols="100" required>
+{{ default_definition }}</textarea
+            >
+          </label>
+          <br />
+          <button type="submit">创建</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>已有规则集</h2>
+        {% if rulesets %}
+        <table border="1" cellpadding="6" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>名称</th>
+              <th>版本</th>
+              <th>状态</th>
+              <th>定义</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rs in rulesets %}
+            <tr>
+              <td>{{ rs.id }}</td>
+              <td>{{ rs.name }}</td>
+              <td>{{ rs.version }}</td>
+              <td>{% if rs.is_active %}已激活{% else %}未激活{% endif %}</td>
+              <td>
+                <pre style="margin: 0; max-width: 720px; white-space: pre-wrap">
+{{ rs.definition_json }}</pre
+                >
+              </td>
+              <td>
+                {% if not rs.is_active %}
+                <form
+                  method="post"
+                  action="/rulesets/{{ rs.id }}/activate"
+                  style="display: inline"
+                >
+                  <button type="submit">激活</button>
+                </form>
+                {% else %}
+                —
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>暂无规则集。</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
+
