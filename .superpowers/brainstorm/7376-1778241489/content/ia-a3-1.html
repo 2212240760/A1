@@ -1,0 +1,55 @@
+<h2>A3（对比驱动）信息架构：页面与主流程</h2>
+<p class="subtitle">基于：Excel 导入 + 简单登录 + 默认按用户记忆对比对象（D3）</p>
+
+<div class="section">
+  <div class="label">顶部导航（登录后）</div>
+  <div class="mock-nav">Logo | 总览（对比） | 数据集 | 评估任务 | 对比 | 报告</div>
+</div>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">页面清单（MVP）</div>
+    <div class="mockup-body">
+      <ul>
+        <li><b>登录</b>：账号/密码</li>
+        <li><b>总览（对比）</b>：默认展示 A/B 差异（D3）+ KPI + 差异明细</li>
+        <li><b>数据集</b>：数据集列表（支持上传 Excel 生成新版本）</li>
+        <li><b>数据集详情</b>：版本列表、字段/行数概览、最近任务与报告</li>
+        <li><b>评估任务</b>：任务列表、运行状态、失败原因、结果预览</li>
+        <li><b>对比</b>：选择 A/B 版本并生成对比结果（可保存为报告）</li>
+        <li><b>报告</b>：历史报告列表、下载导出</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">主流程（从首页出发）</div>
+    <div class="mockup-body">
+      <ol>
+        <li>首次进入总览：提示“先上传数据集” → 跳转到数据集页上传 Excel</li>
+        <li>上传完成：生成新版本 → 可发起“评估任务”</li>
+        <li>评估完成：产出指标结果 → 总览自动聚合到 KPI</li>
+        <li>发起对比：选择 A/B 版本 → 生成差异结果</li>
+        <li>总览默认对比：按用户上次选择恢复 A/B（D3）</li>
+        <li>导出：把评估/对比结果保存为报告并下载</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="ok-ia" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>这版 IA 没问题</h3>
+      <p>继续细化：数据模型 + 任务与对比的落库方式 + 导出形式</p>
+    </div>
+  </div>
+  <div class="option" data-choice="revise-ia" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>需要调整 IA</h3>
+      <p>我会按你指出的页面增删/合并来改</p>
+    </div>
+  </div>
+</div>
